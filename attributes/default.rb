@@ -66,5 +66,5 @@ default["redis"]["syslog"]["facility"] = "local0"
 
 default["redis"]["zypper"]["alias"] = "server-database"
 default["redis"]["zypper"]["title"] = "Server Database"
-default["redis"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/server:/database/openSUSE_#{node["platform_version"] == "12.1" ? "12.3" : node["platform_version"]}/"
+default["redis"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/server:/database/openSUSE_#{node["platform_version"]}/"
 default["redis"]["zypper"]["key"] = "#{node["redis"]["zypper"]["repo"]}repodata/repomd.xml.key"
