@@ -21,33 +21,33 @@ default["redis"]["packages"] = value_for_platform_family(
   "debian" => %w(
     redis-server
   ),
-  "ubuntu" => %w(
-    redis-server
-  ),
   "suse" => %w(
     redis
   )
 )
+
 default["redis"]["service_name"] = value_for_platform_family(
   "debian" => "redis-server",
-  "ubuntu" => "redis-server",
   "suse" => "redis"
 )
+
 default["redis"]["log_file"] = value_for_platform_family(
   "debian" => "/var/log/redis/redis-server.log",
-  "ubuntu" => "/var/log/redis/redis-server.log",
   "suse" => "/var/log/redis/default.log"
 )
+
 default["redis"]["pid_file"] = value_for_platform_family(
   "debian" => "/var/run/redis/redis-server.pid",
-  "ubuntu" => "/var/run/redis/redis-server.pid",
   "suse" => "/var/run/redis/default.pid"
 )
+
 default["redis"]["removed_files"] = %w(
   /etc/redis/default.conf.example
 )
+
 default["redis"]["removed_dirs"] = %w(
 )
+
 default["redis"]["config_file"] = "/etc/redis/redis.conf"
 default["redis"]["listen"] = "127.0.0.1"
 default["redis"]["port"] = 6379
@@ -64,6 +64,7 @@ default["redis"]["syslog"]["enabled"] = false
 default["redis"]["syslog"]["ident"] = "redis"
 default["redis"]["syslog"]["facility"] = "local0"
 
+default["redis"]["zypper"]["enabled"] = true
 default["redis"]["zypper"]["alias"] = "server-database"
 default["redis"]["zypper"]["title"] = "Server Database"
 default["redis"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/server:/database/openSUSE_#{node["platform_version"]}/"

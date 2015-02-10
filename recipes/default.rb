@@ -27,6 +27,10 @@ when "suse"
     title node["redis"]["zypper"]["title"]
 
     action :add
+
+    only_if do
+      node["redis"]["zypper"]["enabled"]
+    end
   end
 end
 
@@ -62,11 +66,11 @@ template node["redis"]["config_file"] do
   owner "root"
   group "root"
   mode 0644
- 
+
   variables(
     node["redis"]
   )
- 
+
   notifies :restart, "service[redis]"
 end
 
