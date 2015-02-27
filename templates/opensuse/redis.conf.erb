@@ -33,7 +33,7 @@ rdbchecksum yes
 dbfilename dump.rdb
 dir /var/lib/redis/default/
 
-maxmemory <%= @memory %>
+maxmemory <%= @memory %>mb
 maxclients <%= @maxconn %>
 
 maxmemory-policy volatile-lru
