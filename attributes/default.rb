@@ -64,8 +64,22 @@ default["redis"]["syslog"]["enabled"] = false
 default["redis"]["syslog"]["ident"] = "redis"
 default["redis"]["syslog"]["facility"] = "local0"
 
-default["redis"]["zypper"]["enabled"] = true
-default["redis"]["zypper"]["alias"] = "server-database"
-default["redis"]["zypper"]["title"] = "Server Database"
-default["redis"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/server:/database/openSUSE_#{node["platform_version"]}/"
-default["redis"]["zypper"]["key"] = "#{node["redis"]["zypper"]["repo"]}repodata/repomd.xml.key"
+case node["platform_family"]
+when "suse"
+  repo = case node["platform_version"]
+  when /\A13\.\d+\z/
+    "openSUSE_#{node["platform_version"]}"
+  when /\A42\.\d+\z/
+    "openSUSE_Leap_#{node["platform_version"]}"
+  when /\A\d{8}\z/
+    "openSUSE_Tumbleweed"
+  else
+    raise "Unsupported SUSE version"
+  end
+
+  default["redis"]["zypper"]["enabled"] = true
+  default["redis"]["zypper"]["alias"] = "server-database"
+  default["redis"]["zypper"]["title"] = "Server Database"
+  default["redis"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/server:/database/#{repo}/"
+  default["redis"]["zypper"]["key"] = "#{node["redis"]["zypper"]["repo"]}repodata/repomd.xml.key"
+end
